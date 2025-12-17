@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Disable serverless mode for custom server
+  output: 'standalone',
 };
 
 export default nextConfig;
