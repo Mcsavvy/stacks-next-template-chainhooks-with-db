@@ -1,32 +1,12 @@
-// Re-export types from the SDK
-// Note: The SDK uses TypeBox schemas, we need to infer the actual types
-export type ChainhookDefinition = {
-  name: string;
-  version: "1";
-  chain: "stacks";
-  network: "mainnet" | "testnet";
-  filters: {
-    events?: Array<{
-      type: string;
-      contract_identifier?: string;
-      function_name?: string;
-      deployer?: string;
-    }>;
-  };
-  action: {
-    type: "http_post";
-    url: string;
-  };
-  options?: {
-    decode_clarity_values?: boolean;
-    enable_on_registration?: boolean;
-    expire_after_evaluations?: number;
-    expire_after_occurrences?: number;
-    include_contract_abi?: boolean;
-    include_proof?: boolean;
-    include_block_metadata?: boolean;
-  };
-};
+// Import types directly from the SDK
+import type {
+  Chainhook,
+  ChainhookDefinition,
+  EvaluateChainhookRequest,
+} from "@hirosystems/chainhooks-client";
+
+// Re-export SDK types for convenience
+export type { ChainhookDefinition, Chainhook, EvaluateChainhookRequest };
 
 export interface ChainhookEvent {
   apply: Array<{
@@ -102,9 +82,9 @@ export interface CreateChainhookParams {
   functionName?: string;
   eventType?:
     | "contract_call"
-    | "contract_deployment"
-    | "stx_transfer_event"
-    | "print_event";
+    | "contract_deploy"
+    | "stx_transfer"
+    | "contract_log";
   decodeValues?: boolean;
   enableOnRegistration?: boolean;
 }

@@ -35,7 +35,7 @@ export async function setupNFTTransferListener() {
 export async function setupSTXTransferMonitor() {
   const chainhook = await createChainhook({
     name: "stx-transfer-monitor",
-    eventType: "stx_transfer_event",
+    eventType: "stx_transfer",
     decodeValues: true,
     enableOnRegistration: true,
   });
@@ -50,7 +50,7 @@ export async function setupSTXTransferMonitor() {
 export async function setupDeploymentTracker() {
   const chainhook = await createChainhook({
     name: "contract-deployment-tracker",
-    eventType: "contract_deployment",
+    eventType: "contract_deploy",
     enableOnRegistration: true,
   });
 
@@ -63,9 +63,9 @@ export async function setupDeploymentTracker() {
  */
 export async function setupPrintEventListener(contractId: string) {
   const chainhook = await createChainhook({
-    name: `print-event-${contractId}`,
+    name: `log-event-${contractId}`,
     contractId,
-    eventType: "print_event",
+    eventType: "contract_log",
     decodeValues: true,
     enableOnRegistration: true,
   });
@@ -153,10 +153,9 @@ export async function manageExistingChainhooks() {
 export async function testChainhookAgainstHistory(chainhookUuid: string) {
   const blockHeight = 100000;
 
-  const result = await evaluateChainhook(chainhookUuid, blockHeight);
+  await evaluateChainhook(chainhookUuid, blockHeight);
 
-  console.log(`Evaluated block ${blockHeight}:`, result);
-  return result;
+  console.log(`Evaluated block ${blockHeight}`);
 }
 
 /**

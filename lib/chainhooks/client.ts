@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/suspicious/noExplicitAny: biome is not smart enough to know that we are using the any type to bypass the type checking */
 import { ChainhooksClient } from "@hirosystems/chainhooks-client";
 import config from "@/lib/config/server";
 import type {
@@ -31,7 +30,9 @@ export async function createChainhook(
     name: params.name,
     chain: "stacks",
     network,
-    filters: {},
+    filters: {
+      events: [],
+    },
     action: {
       type: "http_post",
       url: config.chainhooksWebhookUrl,
@@ -44,47 +45,39 @@ export async function createChainhook(
 
   // Set up filters based on event type
   if (params.eventType === "contract_call" && params.contractId) {
-    (definition.filters as any) = {
-      events: [
-        {
-          type: "contract_call",
-          contract_identifier: params.contractId,
-          ...(params.functionName && { function_name: params.functionName }),
-        },
-      ],
-    };
-  } else if (params.eventType === "contract_deployment") {
-    (definition.filters as any) = {
-      events: [
-        {
-          type: "contract_deployment",
-          ...(params.contractId && {
-            deployer: params.contractId.split(".")[0],
-          }),
-        },
-      ],
-    };
-  } else if (params.eventType === "stx_transfer_event") {
-    (definition.filters as any) = {
-      events: [
-        {
-          type: "stx_transfer_event",
-        },
-      ],
-    };
-  } else if (params.eventType === "print_event" && params.contractId) {
-    (definition.filters as any) = {
-      events: [
-        {
-          type: "print_event",
-          contract_identifier: params.contractId,
-        },
-      ],
-    };
+    definition.filters.events = [
+      {
+        type: "contract_call",
+        contract_identifier: params.contractId,
+        ...(params.functionName && { function_name: params.functionName }),
+      },
+    ];
+  } else if (params.eventType === "contract_deploy") {
+    definition.filters.events = [
+      {
+        type: "contract_deploy",
+        ...(params.contractId && {
+          sender: params.contractId.split(".")[0],
+        }),
+      },
+    ];
+  } else if (params.eventType === "stx_transfer") {
+    definition.filters.events = [
+      {
+        type: "stx_transfer",
+      },
+    ];
+  } else if (params.eventType === "contract_log" && params.contractId) {
+    definition.filters.events = [
+      {
+        type: "contract_log",
+        contract_identifier: params.contractId,
+      },
+    ];
   }
 
-  const result = await client.registerChainhook(definition as any);
-  return result;
+  const result = await client.registerChainhook(definition);
+  return { uuid: result.uuid };
 }
 
 /**
@@ -111,7 +104,7 @@ export async function updateChainhook(
   definition: Partial<ChainhookDefinition>,
 ) {
   const client = getChainhooksClient();
-  return await client.updateChainhook(uuid, definition as any);
+  return await client.updateChainhook(uuid, definition);
 }
 
 /**
@@ -134,9 +127,12 @@ export async function toggleChainhook(uuid: string, enabled: boolean) {
  * Evaluate a chainhook against past blocks
  * Note: This requires the chainhook to be registered first
  */
-export async function evaluateChainhook(uuid: string, blockHeight: number) {
+export async function evaluateChainhook(
+  uuid: string,
+  blockHeight: number,
+): Promise<void> {
   const client = getChainhooksClient();
-  return await client.evaluateChainhook(uuid, {
+  await client.evaluateChainhook(uuid, {
     block_height: blockHeight,
   });
 }

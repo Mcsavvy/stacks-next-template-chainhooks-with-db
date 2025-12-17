@@ -48,7 +48,7 @@ export async function GET(request: Request) {
  *   name: string;
  *   contractId?: string;
  *   functionName?: string;
- *   eventType?: "contract_call" | "contract_deployment" | "stx_transfer_event" | "print_event";
+ *   eventType?: "contract_call" | "contract_deploy" | "stx_transfer" | "contract_log";
  *   decodeValues?: boolean;
  *   enableOnRegistration?: boolean;
  * }

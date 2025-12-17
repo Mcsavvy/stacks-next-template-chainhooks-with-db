@@ -28,11 +28,10 @@ export async function POST(request: Request) {
     const uuid: string = body.uuid;
     const blockHeight: number = body.blockHeight;
 
-    const result = await evaluateChainhook(uuid, blockHeight);
+    await evaluateChainhook(uuid, blockHeight);
 
     return NextResponse.json({
       success: true,
-      data: result,
       message: "Chainhook evaluation completed",
     });
   } catch (error) {

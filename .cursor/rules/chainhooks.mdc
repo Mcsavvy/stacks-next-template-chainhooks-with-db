@@ -7,7 +7,7 @@ alwaysApply: false
 ## Concepts
 - **Chainhook**: A subscribed rule that tells Hiro to watch the Stacks blockchain for specific events and send them to your app via HTTP POST (webhook).
 - **Webhook URL**: Must point to `app/api/chainhooks/webhook/route.ts` in this project.
-- **Events**: Common event types are `contract_call`, `contract_deployment`, `stx_transfer_event`, and `print_event`.
+- **Events**: Common event types are `contract_call`, `contract_deploy`, `stx_transfer`, and `contract_log`.
 
 ## Configuration
 - Always use environment variables defined in `_docs/CHAINHOOKS.md`:

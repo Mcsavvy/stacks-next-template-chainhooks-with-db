@@ -205,9 +205,9 @@ Register a new chainhook.
 
 **Event Types:**
 - `contract_call` - Listen for contract function calls
-- `contract_deployment` - Listen for contract deployments
-- `stx_transfer_event` - Listen for STX transfers
-- `print_event` - Listen for print events
+- `contract_deploy` - Listen for contract deployments
+- `stx_transfer` - Listen for STX transfers
+- `contract_log` - Listen for contract log events (print events)
 
 ### GET /api/chainhooks
 
@@ -331,7 +331,7 @@ await createChainhook({
 ```typescript
 await createChainhook({
   name: "stx-transfer-listener",
-  eventType: "stx_transfer_event",
+  eventType: "stx_transfer",
 });
 ```
 
@@ -340,17 +340,17 @@ await createChainhook({
 ```typescript
 await createChainhook({
   name: "deployment-tracker",
-  eventType: "contract_deployment",
+  eventType: "contract_deploy",
 });
 ```
 
-### 4. Listen for Custom Events
+### 4. Listen for Contract Log Events
 
 ```typescript
 await createChainhook({
-  name: "print-event-listener",
+  name: "contract-log-listener",
   contractId: "SP2J6ZY48GV1EZ5V2V5RB9MP66SW86PYKKNRV9EJ7.my-contract",
-  eventType: "print_event",
+  eventType: "contract_log",
 });
 ```
 
