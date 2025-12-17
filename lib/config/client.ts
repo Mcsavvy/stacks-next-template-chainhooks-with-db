@@ -2,7 +2,7 @@ import z from "zod";
 
 export const envSchema = z.object({
   NEXT_PUBLIC_API_URL: z.string().default("/api"),
-  NEXT_PUBLIC_APP_NAME: z.string().default("Stacks dApp"),
+  NEXT_PUBLIC_APP_NAME: z.string().default("Stacks Chainhooks"),
   NEXT_PUBLIC_STACKS_NETWORK: z.string().default("testnet"),
 });
 
