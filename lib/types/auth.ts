@@ -34,4 +34,3 @@ export interface JWTPayload extends JoseJWTPayload {
   iat: number;
   exp: number;
 }
-

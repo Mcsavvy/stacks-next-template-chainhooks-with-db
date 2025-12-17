@@ -76,12 +76,9 @@ export function AuthSessionProvider({ children }: AuthSessionProviderProps) {
     setSession(null);
   }, []);
 
-  const handleSetSession = useCallback(
-    (s: ClientSession) => {
-      setSession(s);
-    },
-    [],
-  );
+  const handleSetSession = useCallback((s: ClientSession) => {
+    setSession(s);
+  }, []);
 
   useEffect(() => {
     const s = loadSession();
@@ -117,7 +114,7 @@ export function useAuthSession() {
   useEffect(() => {
     if (typeof window !== "undefined" && Object.hasOwn(window, STORAGE_KEY)) {
       // @ts-expect-error - window[STORAGE_KEY] is not typed
-      delete window[STORAGE_KEY]
+      delete window[STORAGE_KEY];
     }
     Object.defineProperty(window, STORAGE_KEY, {
       get: () => context.session,

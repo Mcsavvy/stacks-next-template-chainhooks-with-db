@@ -9,7 +9,9 @@ export async function findUserByWalletAddress(walletAddress: string) {
   });
 }
 
-export async function createUser(walletAddress: string): Promise<ClientSessionUser> {
+export async function createUser(
+  walletAddress: string,
+): Promise<ClientSessionUser> {
   const user = await prisma.user.create({
     data: {
       walletAddress,
@@ -41,7 +43,10 @@ export async function getUserById(userId: string) {
   });
 }
 
-export async function addConnectionHistory(userId: string, connectionData: Record<string, unknown>) {
+export async function addConnectionHistory(
+  userId: string,
+  connectionData: Record<string, unknown>,
+) {
   const user = await prisma.user.findUnique({
     where: { id: userId },
   });
@@ -50,8 +55,8 @@ export async function addConnectionHistory(userId: string, connectionData: Recor
     throw new Error("User not found");
   }
 
-  const history = Array.isArray(user.connectionHistory) 
-    ? user.connectionHistory 
+  const history = Array.isArray(user.connectionHistory)
+    ? user.connectionHistory
     : [];
 
   const updatedHistory = [

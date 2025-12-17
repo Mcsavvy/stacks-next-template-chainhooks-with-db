@@ -1,10 +1,10 @@
-const { createServer } = require('http');
-const { parse } = require('url');
-const next = require('next');
+const { createServer } = require("node:http");
+const { parse } = require("node:url");
+const next = require("next");
 
-const dev = process.env.NODE_ENV !== 'production';
-const hostname = process.env.HOSTNAME || 'localhost';
-const port = parseInt(process.env.PORT || '3000', 10);
+const dev = process.env.NODE_ENV !== "production";
+const hostname = process.env.HOSTNAME || "localhost";
+const port = parseInt(process.env.PORT || "3000", 10);
 
 // Create the Next.js app
 const app = next({ dev, hostname, port });
@@ -15,24 +15,24 @@ app.prepare().then(() => {
     try {
       // Parse the URL
       const parsedUrl = parse(req.url, true);
-      
+
       // Handle the request with Next.js
       await handle(req, res, parsedUrl);
     } catch (err) {
-      console.error('Error occurred handling', req.url, err);
+      console.error("Error occurred handling", req.url, err);
       res.statusCode = 500;
-      res.end('Internal Server Error');
+      res.end("Internal Server Error");
     }
   })
-    .once('error', (err) => {
+    .once("error", (err) => {
       console.error(err);
       process.exit(1);
     })
     .listen(port, () => {
       console.log(
         `> Server listening at http://${hostname}:${port} as ${
-          dev ? 'development' : process.env.NODE_ENV
-        }`
+          dev ? "development" : process.env.NODE_ENV
+        }`,
       );
     });
 });

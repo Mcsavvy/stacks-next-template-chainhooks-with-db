@@ -13,12 +13,13 @@ export async function POST(request: NextRequest) {
     const { walletAddress } = nonceRequestSchema.parse(body);
 
     // Generate a random nonce
-    const nonce = Math.random().toString(36).substring(2) + Date.now().toString(36);
-    
+    const nonce =
+      Math.random().toString(36).substring(2) + Date.now().toString(36);
+
     // Create the authentication message
     const timestamp = new Date().toISOString();
     const domain = request.headers.get("origin") || "localhost:3000";
-    
+
     const message = `Sign this message to authenticate with Stacks dApp
 
 Domain: ${domain}
@@ -36,17 +37,17 @@ By signing this message, you confirm that you are the owner of this wallet addre
     return NextResponse.json(response);
   } catch (error) {
     console.error("Error generating nonce:", error);
-    
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: "Invalid request data", details: error },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

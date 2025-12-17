@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(response);
   } catch (error) {
     console.error("Error fetching user profile:", error);
-    
+
     if (error instanceof Error && error.message.includes("token")) {
       return createAuthError("Invalid or expired token");
     }
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
