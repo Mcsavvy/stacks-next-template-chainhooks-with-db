@@ -1,0 +1,47 @@
+---
+globs: app/api/**/*.ts,lib/**/*.ts
+---
+
+# API Development Guidelines
+
+## API Route Structure
+- Follow Next.js 13+ app router patterns in `app/api/`
+- Use proper HTTP methods (GET, POST, PUT, DELETE)
+- Implement proper error handling with consistent response formats
+- Use Zod for request validation
+
+## Authentication
+- Use [lib/auth/middleware.ts](mdc:lib/auth/middleware.ts) for protected routes
+- Implement proper JWT token verification
+- Handle authentication errors consistently
+- Use [lib/auth/jwt.ts](mdc:lib/auth/jwt.ts) for token operations
+
+## Database Operations
+- Use Prisma client for all database operations
+- Implement proper error handling for database queries
+- Use the utilities in [lib/db/user.ts](mdc:lib/db/user.ts) for user operations
+- Always handle database connection errors
+
+## Request/Response Patterns
+- Use proper TypeScript types for all API requests and responses
+- Implement consistent error response format:
+  ```typescript
+  {
+    error: string,
+    details?: any
+  }
+  ```
+- Use proper HTTP status codes (200, 400, 401, 500)
+- Always validate request data with Zod schemas
+
+## Security
+- Always validate and sanitize input data
+- Implement proper CORS handling
+- Use environment variables for sensitive configuration
+- Never expose sensitive data in API responses
+
+## Error Handling
+- Use try-catch blocks for all async operations
+- Log errors appropriately for debugging
+- Return user-friendly error messages
+- Handle different error types appropriately (validation, authentication, server errors)

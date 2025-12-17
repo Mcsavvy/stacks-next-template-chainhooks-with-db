@@ -1,0 +1,37 @@
+---
+globs: components/**/*.tsx,app/**/*.tsx
+---
+
+# UI Component Guidelines
+
+## Component Structure
+- Use the existing UI components from [components/ui/](mdc:components/ui/)
+- Use proper TypeScript props interfaces
+- Implement proper loading and error states
+
+## Styling
+- Use Tailwind CSS classes for styling
+- Follow the design system established in the UI components
+- Use proper responsive design patterns
+- Implement dark mode support where appropriate
+
+## Card Components
+- Use [Card, CardHeader, CardTitle, CardDescription, CardContent](mdc:components/ui/card.tsx) for content layout
+- Follow the established card patterns for consistent UI
+- Use proper spacing with `space-y-*` classes
+
+## Button Components
+- Use [Button](mdc:components/ui/button.tsx) with proper variants and sizes
+- Implement proper disabled states for loading
+- Use appropriate button variants (default, outline, secondary, etc.)
+
+## Form Components
+- Use [Input](mdc:components/ui/input.tsx) for form inputs
+- Implement proper validation and error display
+- Use proper form patterns with controlled components
+
+## Layout Patterns
+- Use proper semantic HTML structure
+- Implement responsive design with proper breakpoints
+- Use consistent spacing and typography
+- Follow accessibility best practices

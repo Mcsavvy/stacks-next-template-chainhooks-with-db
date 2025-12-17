@@ -1,0 +1,27 @@
+---
+alwaysApply: true
+---
+
+# Stacks Next.js Template Project Structure
+
+This is a Next.js template for Stacks blockchain applications with the following key structure:
+
+## Core Directories
+- `app/` - Next.js 13+ app router with [layout.tsx](mdc:app/layout.tsx) and [page.tsx](mdc:app/page.tsx)
+- `components/` - React components including UI components in [components/ui/](mdc:components/ui/)
+- `hooks/` - Custom React hooks including [wallet.ts](mdc:hooks/wallet.ts) and [api-client.ts](mdc:hooks/api-client.ts)
+- `lib/` - Utility libraries including auth, database, and configuration
+- `providers/` - React context providers like [auth-session-provider.tsx](mdc:providers/auth-session-provider.tsx)
+- `prisma/` - Database schema and migrations
+
+## Key Files
+- [package.json](mdc:package.json) - Dependencies including Stacks SDK, Prisma, and UI libraries
+- [biome.json](mdc:biome.json) - Linting and formatting configuration
+- [components.json](mdc:components.json) - UI component configuration
+- [prisma/schema.prisma](mdc:prisma/schema.prisma) - Database schema for MongoDB
+
+## Authentication Flow
+The app uses JWT-based authentication with wallet signatures:
+- API endpoints in `app/api/auth/` handle login, nonce generation, and user profile
+- [hooks/wallet.ts](mdc:hooks/wallet.ts) provides wallet connection and authentication
+- [providers/auth-session-provider.tsx](mdc:providers/auth-session-provider.tsx) manages session state

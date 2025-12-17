@@ -1,0 +1,28 @@
+---
+description: Guidelines for Stacks blockchain development
+---
+
+# Stacks Development Guidelines
+
+## Wallet Integration
+- Use [@stacks/connect](https://github.com/stacks-network/connect) for wallet connections
+- Always handle wallet connection states properly in [hooks/wallet.ts](mdc:hooks/wallet.ts)
+- Implement proper error handling for wallet operations
+- Use the `useWallet` hook for all wallet-related functionality
+
+## Authentication
+- JWT tokens are used for API authentication with wallet signatures
+- API endpoints follow RESTful patterns in `app/api/auth/`
+- Always verify signatures before creating sessions
+- Use [lib/auth/jwt.ts](mdc:lib/auth/jwt.ts) for token operations
+
+## Database
+- Use Prisma with MongoDB for data persistence
+- User model in [prisma/schema.prisma](mdc:prisma/schema.prisma) includes wallet address and connection history
+- Always use database utilities in [lib/db/user.ts](mdc:lib/db/user.ts) for user operations
+
+## API Development
+- Follow the patterns established in `app/api/auth/` for new endpoints
+- Use Zod for request validation
+- Implement proper error handling with consistent response formats
+- Always include TypeScript types for requests and responses

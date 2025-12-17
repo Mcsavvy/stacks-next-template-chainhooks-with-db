@@ -1,0 +1,34 @@
+---
+globs: *.ts,*.tsx
+---
+
+# TypeScript Development Patterns
+
+## Type Definitions
+- All API types are defined in [lib/types/auth.ts](mdc:lib/types/auth.ts)
+- Use proper TypeScript interfaces for all data structures
+- Extend existing types when possible (e.g., `JWTPayload extends JoseJWTPayload`)
+- Always use type imports for external libraries: `import type { ... }`
+
+## API Client Patterns
+- Use [hooks/api-client.ts](mdc:hooks/api-client.ts) for all API calls
+- Implement proper error handling in API functions
+- Use async/await patterns consistently
+- Always type API responses and requests
+
+## Component Patterns
+- Use "use client" directive for client-side components
+- Implement proper loading and error states
+- Use the existing UI components from [components/ui/](mdc:components/ui/)
+
+## Hook Patterns
+- Custom hooks should be in the [hooks/](mdc:hooks/) directory
+- Use proper dependency arrays in useEffect and useCallback
+- Implement proper cleanup in useEffect hooks
+- Always handle async operations with proper error handling
+
+## Import Organization
+- Group imports: external libraries, internal modules, types
+- Use absolute imports with `@/` prefix
+- Sort imports alphabetically within groups
+- Use type-only imports when appropriate

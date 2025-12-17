@@ -1,0 +1,42 @@
+---
+alwaysApply: true
+---
+
+# Code Quality Standards
+
+## Linting and Formatting
+- Use Biome for linting and formatting as configured in [biome.json](mdc:biome.json)
+- Run `pnpm lint` to check for issues
+- Run `pnpm format` to format code
+- Fix all linting errors before committing
+
+## Code Style
+- Use consistent indentation (2 spaces)
+- Use semicolons consistently
+- Use single quotes for strings
+- Use trailing commas in objects and arrays
+- Use proper TypeScript types throughout
+
+## Error Handling
+- Always handle errors properly with try-catch blocks
+- Provide meaningful error messages
+- Log errors for debugging purposes
+- Never leave console.log statements in production code
+
+## Performance
+- Use proper React patterns (useCallback, useMemo, useEffect dependencies)
+- Implement proper loading states
+- Use proper async/await patterns
+- Avoid unnecessary re-renders
+
+## Security
+- Never commit sensitive data (API keys, secrets)
+- Use environment variables for configuration
+- Validate all user input
+- Implement proper authentication and authorization
+
+## Documentation
+- Use JSDoc comments for complex functions
+- Keep README files updated
+- Document API endpoints properly
+- Use meaningful variable and function names
