@@ -15,6 +15,7 @@
     "db:studio": "prisma studio"
   },
   "dependencies": {
+    "@hirosystems/chainhooks-client": "^1.0.0",
     "@prisma/client": "^6.16.3",
     "@radix-ui/react-slot": "^1.2.3",
     "@stacks/connect": "^8.2.0",

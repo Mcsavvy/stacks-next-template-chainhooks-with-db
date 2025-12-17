@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@hirosystems/chainhooks-client':
+        specifier: ^1.0.0
+        version: 1.0.0(@sinclair/typebox@0.34.41)
       '@prisma/client':
         specifier: ^6.16.3
         version: 6.16.3(prisma@6.16.3(typescript@5.9.3))(typescript@5.9.3)
@@ -149,6 +152,11 @@ packages:
 
   '@emnapi/runtime@1.5.0':
     resolution: {integrity: sha512-97/BJ3iXHww3djw6hYIfErCZFee7qCtrneuLa20UXFCOTCfBM2cvQHjWJ2EG0s0MtdNwInarqCTz35i4wWXHsQ==}
+
+  '@hirosystems/chainhooks-client@1.0.0':
+    resolution: {integrity: sha512-xPp/2ATix/KS0Nbclh4ckq6UGK8Kb0+d3s2K5LzpS6jeUxpTjuF0++M4KmGSMRMThoo33v9IuMRQyK8wPb8Tgg==}
+    peerDependencies:
+      '@sinclair/typebox': ^0.34.33
 
   '@img/colour@1.0.0':
     resolution: {integrity: sha512-A5P/LfWGFSl6nsckYtjw9da+19jB8hkJ6ACTGcDfEJ0aE+l2n2El7dsVM7UVHZQ9s2lmYMWlrS21YLy2IR1LUw==}
@@ -532,6 +540,9 @@ packages:
 
   '@scure/bip39@1.6.0':
     resolution: {integrity: sha512-+lF0BbLiJNwVlev4eKelw1WWLaiKXw7sSl8T6FvBlWkdX+94aGJ4o8XjUdlyhTCjd8c+B3KT3JfS8P0bLRNU6A==}
+
+  '@sinclair/typebox@0.34.41':
+    resolution: {integrity: sha512-6gS8pZzSXdyRHTIqoqSVknxolr1kzfy4/CeDnrzsVz8TTIWUbOBr6gnzOmTYJ3eXQNh4IYHIGi5aIL7sOZ2G/g==}
 
   '@stacks/common@6.16.0':
     resolution: {integrity: sha512-PnzvhrdGRMVZvxTulitlYafSK4l02gPCBBoI9QEoTqgSnv62oaOXhYAUUkTMFKxdHW1seVEwZsrahuXiZPIAwg==}
@@ -1998,6 +2009,10 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
+  '@hirosystems/chainhooks-client@1.0.0(@sinclair/typebox@0.34.41)':
+    dependencies:
+      '@sinclair/typebox': 0.34.41
+
   '@img/colour@1.0.0':
     optional: true
 
@@ -2606,6 +2621,8 @@ snapshots:
     dependencies:
       '@noble/hashes': 1.8.0
       '@scure/base': 1.2.6
+
+  '@sinclair/typebox@0.34.41': {}
 
   '@stacks/common@6.16.0':
     dependencies:
