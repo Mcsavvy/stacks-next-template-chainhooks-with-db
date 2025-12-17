@@ -21,7 +21,7 @@ export async function POST(request: Request) {
           success: false,
           error: "Missing required fields: uuid, blockHeight",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
         error: "Failed to evaluate chainhook",
         message: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

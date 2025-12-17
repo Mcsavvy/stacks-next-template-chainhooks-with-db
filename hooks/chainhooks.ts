@@ -72,7 +72,7 @@ export function useChainhooks() {
         setLoading(false);
       }
     },
-    []
+    [],
   );
 
   /**
@@ -132,7 +132,7 @@ export function useChainhooks() {
         setLoading(false);
       }
     },
-    []
+    [],
   );
 
   /**
@@ -195,7 +195,7 @@ export function useChainhooks() {
         setLoading(false);
       }
     },
-    []
+    [],
   );
 
   /**
@@ -233,7 +233,7 @@ export function useChainhooks() {
         setLoading(false);
       }
     },
-    []
+    [],
   );
 
   return {

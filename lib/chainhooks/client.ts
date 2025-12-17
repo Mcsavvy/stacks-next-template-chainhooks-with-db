@@ -20,7 +20,7 @@ export function getChainhooksClient(): ChainhooksClient {
  * Create a new chainhook with simplified parameters
  */
 export async function createChainhook(
-  params: CreateChainhookParams
+  params: CreateChainhookParams,
 ): Promise<{ uuid: string }> {
   const client = getChainhooksClient();
 
@@ -108,7 +108,7 @@ export async function getChainhook(uuid: string) {
  */
 export async function updateChainhook(
   uuid: string,
-  definition: Partial<ChainhookDefinition>
+  definition: Partial<ChainhookDefinition>,
 ) {
   const client = getChainhooksClient();
   return await client.updateChainhook(uuid, definition as any);
