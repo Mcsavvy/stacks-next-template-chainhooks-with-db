@@ -26,3 +26,14 @@ description: Guidelines for Stacks blockchain development
 - Use Zod for request validation
 - Implement proper error handling with consistent response formats
 - Always include TypeScript types for requests and responses
+
+## Chainhooks Integration
+- Use [Hiro Chainhooks](https://docs.hiro.so/stacks/chainhooks) for real-time blockchain event monitoring
+- Server-side: Use [lib/chainhooks/client.ts](mdc:lib/chainhooks/client.ts) for all chainhook operations (create, list, get, update, delete, toggle, evaluate)
+- Client-side: Use [hooks/chainhooks.ts](mdc:hooks/chainhooks.ts) React hook for managing chainhooks from components
+- Webhook handler: Process events in [app/api/chainhooks/webhook/route.ts](mdc:app/api/chainhooks/webhook/route.ts)
+  - Always verify webhook signatures using `SECRET_KEY` from environment variables
+  - Handle both `apply` (new blocks) and `rollback` (chain reorganizations) events
+  - Use types from [lib/types/chainhooks.ts](mdc:lib/types/chainhooks.ts) for type safety
+- Configuration: Set `CHAINHOOKS_API_KEY`, `CHAINHOOKS_WEBHOOK_URL`, `CHAINHOOKS_NETWORK`, and `SECRET_KEY` in environment variables
+- See [CHAINHOOKS.md](mdc:_docs/CHAINHOOKS.md) for detailed setup and usage examples

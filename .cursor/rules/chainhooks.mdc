@@ -1,0 +1,53 @@
+---
+alwaysApply: false
+---
+## Scope
+- Applies to `app/api/chainhooks/**/*.ts`, `lib/chainhooks/**/*.ts`, `lib/types/chainhooks.ts`, and `hooks/chainhooks.ts`
+
+## Concepts
+- **Chainhook**: A subscribed rule that tells Hiro to watch the Stacks blockchain for specific events and send them to your app via HTTP POST (webhook).
+- **Webhook URL**: Must point to `app/api/chainhooks/webhook/route.ts` in this project.
+- **Events**: Common event types are `contract_call`, `contract_deployment`, `stx_transfer_event`, and `print_event`.
+
+## Configuration
+- Always use environment variables defined in `_docs/CHAINHOOKS.md`:
+  - `CHAINHOOKS_API_KEY`
+  - `CHAINHOOKS_WEBHOOK_URL`
+  - `CHAINHOOKS_NETWORK`
+  - `SECRET_KEY`
+- Never hard-code secrets or URLs; read them from `lib/config/server.ts`.
+
+## API Patterns
+- Follow the patterns in `app/api/chainhooks/` for:
+  - Registering a chainhook via `POST /api/chainhooks`
+  - Listing via `GET /api/chainhooks`
+  - Managing a single chainhook via `GET/PUT/DELETE /api/chainhooks/[uuid]`
+  - Toggling via `POST /api/chainhooks/[uuid]/toggle`
+  - Historical evaluation via `POST /api/chainhooks/evaluate`
+- Always validate request bodies (e.g., with Zod) and return consistent error shapes as per `api-development.mdc`.
+
+## Webhook Handling
+- Process incoming events in `app/api/chainhooks/webhook/route.ts` using `ChainhookPayload` from `lib/types/chainhooks.ts`.
+- Separate responsibilities:
+  - **Parsing & verification**: Verify `x-chainhook-signature` using `SECRET_KEY`.
+  - **Business logic**: Put event-specific logic into small, testable functions (e.g., `processChainhookEvent`).
+- Always handle both `apply` (new blocks) and `rollback` (reorg) sections to keep your data consistent.
+
+## Client & React Hooks
+- Use `lib/chainhooks/client.ts` for all server-side calls to Hiro’s Chainhook API (create/list/get/toggle/evaluate).
+- Use `hooks/chainhooks.ts` as the single React hook interface for client-side components.
+- Expose only high-level operations from the React hook:
+  - `listChainhooks`, `registerChainhook`, `getChainhook`, `updateChainhook`, `deleteChainhook`, `toggleChainhook`, `evaluateChainhook`.
+- Maintain clear loading and error state in the hook and avoid duplicating API logic in components.
+
+## Testing & Local Dev
+- For local development, always expose port 3000 using a tunneling tool (e.g., ngrok) and set `CHAINHOOKS_WEBHOOK_URL` accordingly.
+- Use the curl examples in `_docs/CHAINHOOKS.md` to test:
+  - Webhook reachability
+  - Successful registration
+- Log structured, minimal information from webhook handlers (no sensitive data) to aid debugging.
+
+## Common Pitfalls
+- **Invalid signature**: Ensure `SECRET_KEY` in your env matches what Hiro uses.
+- **No events received**: Confirm `CHAINHOOKS_WEBHOOK_URL` is public and correct, and that the chain/network matches (`CHAINHOOKS_NETWORK` vs `NEXT_PUBLIC_STACKS_NETWORK`).
+- **Overly broad filters**: Prefer specific contracts/functions when possible to reduce noise and processing load.

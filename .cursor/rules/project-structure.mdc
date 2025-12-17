@@ -8,11 +8,15 @@ This is a Next.js template for Stacks blockchain applications with the following
 
 ## Core Directories
 - `app/` - Next.js 13+ app router with [layout.tsx](mdc:app/layout.tsx) and [page.tsx](mdc:app/page.tsx)
+  - `app/api/chainhooks/` - Chainhook API endpoints for managing and receiving blockchain events
 - `components/` - React components including UI components in [components/ui/](mdc:components/ui/)
-- `hooks/` - Custom React hooks including [wallet.ts](mdc:hooks/wallet.ts) and [api-client.ts](mdc:hooks/api-client.ts)
-- `lib/` - Utility libraries including auth, database, and configuration
+- `hooks/` - Custom React hooks including [wallet.ts](mdc:hooks/wallet.ts), [api-client.ts](mdc:hooks/api-client.ts), and [chainhooks.ts](mdc:hooks/chainhooks.ts)
+- `lib/` - Utility libraries including auth, database, configuration, and chainhooks
+  - `lib/chainhooks/` - Chainhook client utilities and examples
+  - `lib/types/chainhooks.ts` - TypeScript types for chainhooks
 - `providers/` - React context providers like [auth-session-provider.tsx](mdc:providers/auth-session-provider.tsx)
 - `prisma/` - Database schema and migrations
+- `_docs/` - Documentation including [CHAINHOOKS.md](mdc:_docs/CHAINHOOKS.md) for chainhook integration guide
 
 ## Key Files
 - [package.json](mdc:package.json) - Dependencies including Stacks SDK, Prisma, and UI libraries
@@ -25,3 +29,11 @@ The app uses JWT-based authentication with wallet signatures:
 - API endpoints in `app/api/auth/` handle login, nonce generation, and user profile
 - [hooks/wallet.ts](mdc:hooks/wallet.ts) provides wallet connection and authentication
 - [providers/auth-session-provider.tsx](mdc:providers/auth-session-provider.tsx) manages session state
+
+## Chainhooks Integration
+The app integrates with Hiro Chainhooks for real-time blockchain event monitoring:
+- API endpoints in `app/api/chainhooks/` handle chainhook registration, management, and webhook reception
+- [lib/chainhooks/client.ts](mdc:lib/chainhooks/client.ts) provides server-side utilities for interacting with Hiro's Chainhook API
+- [hooks/chainhooks.ts](mdc:hooks/chainhooks.ts) provides React hook for client-side chainhook management
+- [app/api/chainhooks/webhook/route.ts](mdc:app/api/chainhooks/webhook/route.ts) receives and processes blockchain events from Hiro
+- See [CHAINHOOKS.md](mdc:_docs/CHAINHOOKS.md) for complete integration guide
